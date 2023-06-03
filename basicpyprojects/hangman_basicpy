@@ -8,7 +8,7 @@ import string
 
 def get_valid_word(words):
     word = random.choice(words) # randomy chooses something from this list
-    while "-" in word or " " in word:
+    while "-" in word or " " in word: # continues choosing a word until it doesn't contain a dash/space
         word = random.choice(words)
     
     return word.upper()
@@ -16,7 +16,8 @@ def get_valid_word(words):
 def hangman():
     word = get_valid_word(words)
     word_letters = set(word) # keeps track of valid letters, saves all letters of a word in a set, and keeps track of it
-    alphabet = set(string.ascii_uppercase)
+    # set is an unordered list, whereas a list has ordered
+    alphabet = set(string.ascii_uppercase) # imports uppercase letters in alphabet
     used_letters = set() # what the user has guessed
 
     #getting user input
@@ -28,11 +29,11 @@ def hangman():
         word_list = [letter if letter in used_letters else "-" for letter in word]
         print("Current word: ", " ".join(word_list))
 
-        user_letter = input("Guess a letter: ").upper()
-        if user_letter in alphabet - used_letters: # if it's a valid letter in the alphabet that hasn't been used yet, add it to letters
+        user_letter = input("Guess a letter: ").upper() # uppercase because case matters
+        if user_letter in alphabet - used_letters: # if it's a valid letter in the alphabet that hasn't been used yet, add it to used
             used_letters.add(user_letter)
-            if user_letter in word_letters:
-                word_letters.remove(user_letter)
+            if user_letter in word_letters: # and if that guessed letter is in the word..
+                word_letters.remove(user_letter) # remo
 
         elif user_letter in used_letters:
             print("you have already guessed that letter. Try again..")
